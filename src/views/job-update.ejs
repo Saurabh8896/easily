@@ -1,0 +1,86 @@
+
+  <div>
+    <div class="container p-3 mx-auto w-50 form-box my-5 rounded-md">
+      <h2 style="color: #181642" class="text-center mb-3">Update Job</h2>
+      <% if(jobs){ %>
+      <form action="/job/update/<%=jobs.id%>" method="post">
+        <div class="input-group mb-3">
+          <select required name="field" class="form-select" aria-label="Default select example">
+            <option selected disabled value="Tech">select new job category</option>
+            <option value="Tech" <%= jobs.field === 'Tech' ? 'selected' : '' %>>Tech</option>
+            <option value="Non-Tech" <%= jobs.field === 'Non-Tech' ? 'selected' : '' %>>Non-Tech</option>
+          </select>
+        </div>
+  
+        <div class="input-group mb-3">
+          <select required name="role" class="form-select" aria-label="Default select example">
+            <option selected disabled>select new job designation</option>
+            <option value="HR" <%= jobs.role === 'HR' ? 'selected' : '' %>>HR</option>
+            <option value="SDE" <%= jobs.role === 'SDE' ? 'selected' : '' %>>SDE</option>
+            <option value="DevOps" <%= jobs.role === 'DevOps' ? 'selected' : '' %>>DevOps</option>
+            <option value="MERN Developer" <%= jobs.role === 'MERN Developer' ? 'selected' : '' %>>MERN Developer</option>
+            <option value="MEAN Developer" <%= jobs.role === 'MEAN Developer' ? 'selected' : '' %>>MEAN Developer</option>
+            <option value="JAVA Developer" <%= jobs.role === 'JAVA Developer' ? 'selected' : '' %>>JAVA Developer</option>
+            <option value="Front-End Developer" <%= jobs.role === 'Front-End Developer' ? 'selected' : '' %>>Front-End Developer</option>
+            <option value="Back-End Developer" <%= jobs.role === 'Back-End Developer' ? 'selected' : '' %>>Back-End Developer</option>
+            <option value="Full-Stack Developer" <%= jobs.role === 'Full-Stack Developer' ? 'selected' : '' %>>Full-Stack Developer</option>
+          </select>
+        </div>
+  
+        <div class="mb-3">
+          <label for="basic-url" class="form-label">Enter job location</label>
+          <div class="input-group">
+            <input value="<%= jobs.location %>" required name="location" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
+          </div>
+        </div>
+  
+        <div class="input-group mb-3">
+          <span class="input-group-text">Company Name</span>
+          <input value="<%= jobs.name %>" required name="name" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
+        </div>
+  
+        <div class="input-group mb-3">
+          <input value="<%= jobs.packages %>" required name="packages" type="text" class="form-control" placeholder="enter salary" aria-label="Username" />
+          <span class="input-group-text">Total Positions</span>
+          <input value="<%= jobs.openings %>" required name="openings" type="number" class="form-control" placeholder="total no of openings" aria-label="Server" />
+        </div>
+  
+        <div class="input-group mb-3">
+          <select required multiple name="skills" id="skillsSelect" class="form-select" aria-label="Default select example">
+            <option disabled>select skills required for this job</option>
+            <option value="React">React</option>
+            <option value="NodeJs">NodeJs</option>
+            <option value="Angular">Angular</option>
+            <option value="MongoDB">MongoDB</option>
+            <option value="SQL">SQL</option>
+            <option value="Express">Express</option>
+            <option value="Java">Java</option>
+            <option value="SpringBoot">SpringBoot</option>
+            <option value="C++">C++</option>
+            <option value="Data Structures & Algo">Data Structures & Algo</option>
+          </select>
+          <span class="input-group-text">Apply By</span>
+          <input value="<%=jobs.date%>" name="date" type="date" class="form-control" placeholder="total no of openings" aria-label="Server" />
+        </div>
+  
+        <button class="w-100 mb-3 mt-2 btn btn-md btn-success" type="submit">Update</button>
+      </form>
+      <% } %>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const jobSkills = <%- JSON.stringify(jobs.skills) %> ;// Get job skills from backend
+      const selectElement = document.getElementById("skillsSelect");
+  
+      for (let option of selectElement.options) {
+        if (jobSkills.includes(option.value)) {
+          option.selected = true;
+        } else {
+          option.selected = false;
+        }
+      }
+    });
+  </script>
+  
