@@ -23,4 +23,5 @@ export default class UserModel{
 
 }
 
-var users = [new UserModel(1,'saurabh','saurabh201490@axiscolleges.in','12345')]
+var users = [new UserModel(1,'saurabh','saurabh201490@axiscolleges.in','12345'),
+             new UserModel(2,'shubham','shubham@gmail.com','12345')]

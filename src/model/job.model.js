@@ -1,7 +1,7 @@
 
 export default class JobModel{
 
-    constructor(id,name,field,role,location,packages,skills,date,currentdate,openings,appicants){
+    constructor(id,name,field,role,location,packages,skills,date,currentdate,openings,userId){
         this.id= id
         this.name= name
         this.field = field
@@ -12,9 +12,8 @@ export default class JobModel{
         this.date = date
         this.currentdate = currentdate
         this.openings = openings
-        this.appicants = appicants
+        this.userId = userId
     }
-
     static getjob(){
         return jobs
     }
@@ -44,16 +43,15 @@ export default class JobModel{
             date ?? jobs[jobIndex].date,
             jobs[jobIndex].currentdate, // Preserve currentdate
             openings ?? jobs[jobIndex].openings,
-            jobs[jobIndex].appicants // Preserve applicants
+            jobs[jobIndex].userId
         );
-            console.log(jobs)
         return jobs[jobIndex]; // Return updated job
     }
 
 
 
-    static addJob(name,field,role,location,packages,date,currentdate,skills,openings,appicants){
-        const addNewJob = new JobModel(jobs.length+1,name,field,role,location,packages,skills,date,currentdate,openings,appicants)
+    static addJob(name,field,role,location,packages,date,currentdate,skills,openings,userId){
+        const addNewJob = new JobModel(jobs.length+1,name,field,role,location,packages,skills,date,currentdate,openings,userId)
         const added = jobs.push(addNewJob)
         return added
     }
@@ -64,13 +62,20 @@ export default class JobModel{
         return deletejobs
     }
 
+    static checkId(jobId,id){
+        const check = jobs.find((job)=>job.id==jobId && job.userId==id)
+        return check
+    }
+
 } 
 
 var jobs = [
-    new JobModel(1, "Coding Ninja", "Tech", "SDE", "New Delhi", "12", ['React', 'NodeJs', 'Angular', 'MongoDB', 'SQL'],"2025-02-24","2024-12-10","3","1"),
+    new JobModel(1, "Coding Ninja", "Tech", "SDE", "New Delhi", "12", ['React', 'NodeJs', 'Angular', 'MongoDB', 'SQL'],"2025-02-24","2024-12-10","3","2"),
     new JobModel(2, "Microsoft", "Tech", "MERN Developer", "Gurgaon", "25", ['React', 'NodeJs', 'Express', 'MongoDB', 'SQL'],"2025-02-24","2024-12-10","4","1"),
     new JobModel(3, "Google", "Tech", "MEAN Developer", "Bangalore", "50", ['React', 'NodeJs', 'Angular'],"2025-02-24","2024-12-10","2","1"),
-    new JobModel(4, "HCL", "Tech", "Full-Stack Developer", "Lucknow", "7-8", ['React', 'NodeJs', 'Angular', 'MongoDB', 'SQL','SpringBoot'],"2025-02-24","2024-12-10","2","1")
-    
+    new JobModel(4, "HCL", "Tech", "Full-Stack Developer", "Lucknow", "7-8", ['React', 'NodeJs', 'Angular', 'MongoDB', 'SQL','SpringBoot'],"2025-02-24","2024-12-10","2","2") 
 ];
+
+
+
   

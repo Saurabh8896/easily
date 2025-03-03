@@ -10,22 +10,27 @@
         </tr>
       </thead>
       <tbody>
-        
+       <% if(applicants){ %>
+        <% let id=1%>
+
+        <% applicants.forEach((applicant)=>{ %>
         <tr>
-          <th scope="row">1</th>
-          <td>saurabh</td>
-          <td>krvivi28@gmail.com</td>
-          <td>7839358367</td>
+          <th scope="row"><%=id%></th>
+          <td><%=applicant.name%></td>
+          <td><%=applicant.email%></td>
+          <td><%=applicant.contact%></td>
           <td>
             <a
               class="btn btn-sm btn-primary"
-              href="http://localhost:3200/uploads/resume.pdf"
+              href="<%=applicant.url%>"
               target="_blank"
               >view</a
             >
           </td>
         </tr>
-        
+        <% id++ %>
+        <% })%>
+        <% } %>
       </tbody>
     </table>
   </div>
